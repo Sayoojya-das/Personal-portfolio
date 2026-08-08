@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sayoojya Das — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Sayoojya Das — B.Tech CSE Student, problem solver, and tech enthusiast from Trivandrum, Kerala." />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Three.js for 3D background -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Scroll Progress & Background Noise -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <div class="noise"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Three.js 3D Canvas -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✨</span>
+    <span class="toast-msg" id="toast-msg">Copied!</span>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a class="nav-logo clickable" href="#" onclick="switchTab('home');return false;">SD.</a>
+    <ul class="nav-tabs" id="nav-tabs">
+      <li class="nav-tab active clickable" data-tab="home"       onclick="switchTab('home')">Home</li>
+      <li class="nav-tab clickable"        data-tab="about"      onclick="switchTab('about')">About</li>
+      <li class="nav-tab clickable"        data-tab="skills"     onclick="switchTab('skills')">Skills</li>
+      <li class="nav-tab clickable"        data-tab="projects"   onclick="switchTab('projects')">Projects</li>
+      <li class="nav-tab clickable"        data-tab="experience" onclick="switchTab('experience')">Experience</li>
+      <li class="nav-tab clickable"        data-tab="education"  onclick="switchTab('education')">Education</li>
+      <li class="nav-tab clickable"        data-tab="contact"    onclick="switchTab('contact')">Contact</li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn btn-primary btn-sm clickable" onclick="switchTab('contact')" id="hire-btn">✉ Hire Me</button>
+      <button class="mob-btn clickable" id="mob-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="nav-tab clickable" onclick="switchTab('home');closeMobileMenu()">🏠 Home</div>
+    <div class="nav-tab clickable" onclick="switchTab('about');closeMobileMenu()">👤 About</div>
+    <div class="nav-tab clickable" onclick="switchTab('skills');closeMobileMenu()">⚡ Skills</div>
+    <div class="nav-tab clickable" onclick="switchTab('projects');closeMobileMenu()">🚀 Projects</div>
+    <div class="nav-tab clickable" onclick="switchTab('experience');closeMobileMenu()">💼 Experience</div>
+    <div class="nav-tab clickable" onclick="switchTab('education');closeMobileMenu()">🎓 Education</div>
+    <div class="nav-tab clickable" onclick="switchTab('contact');closeMobileMenu()">📬 Contact</div>
+  </div>
+
+  <div id="app">
+
+    <!-- ═══════════════ HOME ═══════════════ -->
+    <section class="section active" id="home">
+      <div class="hero-content">
+        <div class="hero-left">
+          <div class="hero-greeting">
+            <span class="wave">👋</span>
+            <span style="color:var(--text-muted)">Hello, I'm</span>
+            <span style="color:var(--teal-l)">available for opportunities</span>
+          </div>
+
+          <!-- ✦ Stylish split-stroke name ✦ -->
+          <div class="hero-name-wrap">
+            <span class="hero-name-outline">SAYOOJYA</span>
+            <span class="hero-name-solid">DAS</span>
+          </div>
+
+          <div class="hero-role-wrap">
+            <div class="hero-role-line"></div>
+            <div class="hero-role">
+              <span class="tw" id="tw-text"></span><span class="blink">|</span>
+            </div>
+          </div>
+
+          <p class="hero-desc">
+            An organised and motivated individual — eager to utilise time management and organisational skills across diverse settings, ready to apply education with excellent technical abilities.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg clickable" onclick="switchTab('projects')" id="skills-btn">
+              🚀 View Projects
+            </button>
+            <button class="btn btn-ghost btn-lg clickable" onclick="switchTab('contact')" id="contact-btn">
+              📬 Get in Touch
+            </button>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-box">
+              <div class="stat-num">2025</div>
+              <div class="stat-label">B.Tech Start</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">CSE</div>
+              <div class="stat-label">Specialisation</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">TVM</div>
+              <div class="stat-label">Based in</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Orb -->
+        <div class="hero-right">
+          <div class="orb-scene" id="orb-scene">
+            <div class="orb-ring r1"></div>
+            <div class="orb-ring r2"></div>
+            <div class="orb-ring r3"></div>
+            <div class="orb-ring r4"></div>
+            <div class="orb-core">
+              <div class="orb-emoji">💻</div>
+            </div>
+            <!-- Orbital nodes -->
+            <div class="orb-node n1">⚡</div>
+            <div class="orb-node n2">🧩</div>
+            <div class="orb-node n3">🎓</div>
+            <div class="orb-node n4">🔮</div>
+            <!-- Floating geo shapes -->
+            <div class="geo-shape g1"></div>
+            <div class="geo-shape g2"></div>
+            <div class="geo-shape g3"></div>
+            <div class="geo-shape g4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ ABOUT ═══════════════ -->
+    <section class="section" id="about">
+      <div class="container">
+        <span class="section-badge reveal"><span class="dot"></span> // about_me.js</span>
+        <h2 class="section-title reveal">Who I <span class="grad-text">Am</span></h2>
+        <p class="section-subtitle reveal">A curious mind exploring the intersection of logic, creativity, and technology.</p>
+
+        <div class="about-grid">
+          <!-- 3D Flip Card -->
+          <div class="about-card-3d reveal clickable" id="about-flip" onclick="flipAbout()" title="Click to flip!">
+            <div class="about-card-inner" id="about-inner">
+              <div class="card-face card-front">
+                <div class="avatar-hex"><div class="avatar-hex-inner">🧑‍💻</div></div>
+                <div class="card-name">Sayoojya Das</div>
+                <div class="card-role">// B.Tech CSE Student</div>
+                <div class="flip-hint">🔄 Hover or click to flip</div>
+              </div>
+              <div class="card-face card-back">
+                <div style="font-size:2.5rem;position:relative;z-index:1">🌐</div>
+                <div class="card-name" style="font-size:1.05rem;position:relative;z-index:1">Languages I Speak</div>
+                <div style="position:relative;z-index:1;text-align:center">
+                  <span class="lang-pill">🇬🇧 English</span>
+                  <span class="lang-pill">🇮🇳 Hindi <small style="opacity:0.6">(Inter.)</small></span>
+                  <span class="lang-pill">💻 Code (Learning)</span>
+                </div>
+                <div class="flip-hint" style="position:relative;z-index:1;margin-top:0.5rem">🔄 Click to flip back</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Blocks -->
+          <div class="about-info">
+            <div class="info-block reveal rd1 clickable" onclick="showToast('📋 Profile copied!')">
+              <div class="info-label">📋 Profile</div>
+              <div style="font-size:0.93rem;color:var(--text-secondary);line-height:1.82">
+                An organised and motivated individual, eager to utilise time management and organisational skills across diverse settings. Offering excellent technical abilities with software and applications, with the ability to handle challenging work and maintain excellent time management.
+              </div>
+            </div>
+
+            <div class="info-block reveal rd2">
+              <div class="info-label">📍 Contact Details</div>
+              <a class="contact-row clickable" href="tel:+919856432263" onclick="showToast('📞 Opening phone...')">
+                <span class="ci">📞</span> +91 9856432263
+              </a>
+              <a class="contact-row clickable" href="mailto:sayoojyadas323@gmail.com" onclick="copyEmail()">
+                <span class="ci">✉️</span> sayoojyadas323@gmail.com
+              </a>
+              <a class="contact-row clickable" href="#" onclick="copyToClipboard('Trivandrum, Kerala, India 651905');return false">
+                <span class="ci">📍</span> Trivandrum, Kerala, India 651905
+              </a>
+              <a class="contact-row clickable" href="https://www.linkedin.com/in/" target="_blank" rel="noopener" onclick="showToast('🔗 Opening LinkedIn...')">
+                <span class="ci">💼</span> LinkedIn Profile →
+              </a>
+            </div>
+
+            <div class="info-block reveal rd3">
+              <div class="info-label">🌟 Highlights</div>
+              <div class="tag-cloud">
+                <span class="chip clickable" onclick="showToast('♟️ Strategic Thinker!')">♟️ Strategic Thinker</span>
+                <span class="chip clickable" onclick="showToast('🤝 Team Player!')">🤝 Team Player</span>
+                <span class="chip clickable" onclick="showToast('🧩 Problem Solver!')">🧩 Problem Solver</span>
+                <span class="chip clickable" onclick="showToast('💪 Self-Driven!')">💪 Self-Driven</span>
+                <span class="chip clickable" onclick="showToast('💻 Tech Enthusiast!')">💻 Tech Enthusiast</span>
+                <span class="chip clickable" onclick="showToast('🎓 CSE Student!')">🎓 CSE Student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SKILLS ═══════════════ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <span class="section-badge reveal"><span class="dot"></span> // skills.json</span>
+        <h2 class="section-title reveal">What I <span class="grad-text-fire">Bring</span></h2>
+        <p class="section-subtitle reveal">Hover or click any card to flip and discover more.</p>
+
+        <div class="skills-header-row reveal">
+          <span class="shr-icon">⚙️</span>
+          Technical Skills
+          <span class="shr-line"></span>
+        </div>
+        <div class="skills-grid" id="tech-skills-grid"></div>
+
+        <div class="skills-header-row reveal" style="margin-top:3rem">
+          <span class="shr-icon">🧠</span>
+          Soft Skills
+          <span class="shr-line"></span>
+        </div>
+        <div class="skills-grid" id="soft-skills-grid"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EXPERIENCE ═══════════════ -->
+    <section class="section" id="experience">
+      <div class="container">
+        <span class="section-badge reveal"><span class="dot"></span> // experience.log</span>
+        <h2 class="section-title reveal">My <span class="grad-text-ocean">Journey</span></h2>
+        <p class="section-subtitle reveal">Every experience is a stepping stone toward a stronger professional self.</p>
+
+        <div class="timeline" id="timeline"></div>
+
+        <div class="reveal" style="margin-top:3rem;text-align:center">
+          <p style="color:var(--text-muted);margin-bottom:1.25rem;font-family:var(--font-mono);font-size:0.82rem">
+            // More experiences loading... currently pursuing B.Tech CSE 🚀
+          </p>
+          <button class="btn btn-outline-magenta clickable" onclick="switchTab('contact')" id="collab-btn">
+            🤝 Let's Collaborate
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EDUCATION ═══════════════ -->
+    <section class="section" id="education">
+      <div class="container">
+        <span class="section-badge reveal"><span class="dot"></span> // education.db</span>
+        <h2 class="section-title reveal">Academic <span class="grad-text-neo">Path</span></h2>
+        <p class="section-subtitle reveal">Building a strong foundation in computer science and engineering.</p>
+
+        <div class="edu-grid" id="edu-grid"></div>
+
+        <div class="edu-path reveal" style="margin-top:2rem">
+          <div class="edu-path-node">
+            <div class="edu-path-label">Schooling</div>
+            <div class="edu-path-name" style="color:var(--violet-l)">IMNSGHSS MAYYIL</div>
+          </div>
+          <div class="edu-path-line"></div>
+          <div class="edu-path-node">
+            <div class="edu-path-label">Currently</div>
+            <div class="edu-path-name" style="color:var(--cyan)">LBSITW — 2025→2029</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CONTACT ═══════════════ -->
+    <section class="section" id="contact">
+      <div class="container">
+        <span class="section-badge reveal"><span class="dot"></span> // contact.send()</span>
+        <h2 class="section-title reveal">Let's <span class="grad-text">Connect</span></h2>
+        <p class="section-subtitle reveal">Whether it's a collaboration, an opportunity, or just a hello — I'd love to hear from you.</p>
+
+        <div class="contact-grid">
+          <!-- Contact Cards -->
+          <div class="contact-cards">
+            <a class="contact-card reveal rd1 clickable" href="mailto:sayoojyadas323@gmail.com" onclick="copyEmail()">
+              <div class="cc-icon" style="background:rgba(255,62,108,0.15);border:1px solid rgba(255,62,108,0.3)">📧</div>
+              <div>
+                <div class="cc-label">Email</div>
+                <div class="cc-value">sayoojyadas323@gmail.com</div>
+              </div>
+              <div class="cc-arrow">↗</div>
+            </a>
+
+            <a class="contact-card reveal rd2 clickable" href="tel:+919856432263" onclick="showToast('📞 Opening dialer...')">
+              <div class="cc-icon" style="background:rgba(0,229,160,0.15);border:1px solid rgba(0,229,160,0.3)">📞</div>
+              <div>
+                <div class="cc-label">Phone</div>
+                <div class="cc-value">+91 9856432263</div>
+              </div>
+              <div class="cc-arrow">↗</div>
+            </a>
+
+            <a class="contact-card reveal rd3 clickable" href="https://www.linkedin.com/in/" target="_blank" rel="noopener" onclick="showToast('🔗 Opening LinkedIn...')">
+              <div class="cc-icon" style="background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.3)">💼</div>
+              <div>
+                <div class="cc-label">LinkedIn</div>
+                <div class="cc-value">linkedin.com/in/sayoojyadas</div>
+              </div>
+              <div class="cc-arrow">↗</div>
+            </a>
+
+            <div class="contact-card reveal rd4 clickable" onclick="copyToClipboard('Trivandrum, Kerala, India 651905')">
+              <div class="cc-icon" style="background:rgba(139,47,201,0.15);border:1px solid rgba(139,47,201,0.3)">📍</div>
+              <div>
+                <div class="cc-label">Location</div>
+                <div class="cc-value">Trivandrum, Kerala, India</div>
+              </div>
+              <div class="cc-arrow">📋</div>
+            </div>
+
+            <div class="availability-badge reveal rd5">
+              <div class="avail-dot"></div>
+              <div>
+                <div class="avail-title">Open to Opportunities</div>
+                <div class="avail-sub">Internships, projects & collaborations</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="form-wrap reveal">
+            <div class="form-title">Send a Message ✨</div>
+            <div class="form-sub">I'll get back to you as soon as possible!</div>
+
+            <form id="contact-form" onsubmit="submitForm(event)">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="f-name">Your Name</label>
+                  <input class="form-input" type="text" id="f-name" placeholder="Jane Smith" required autocomplete="name" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="f-email">Email</label>
+                  <input class="form-input" type="email" id="f-email" placeholder="jane@email.com" required autocomplete="email" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-subject">Subject</label>
+                <input class="form-input" type="text" id="f-subject" placeholder="Internship / Collaboration / Just Saying Hi!" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-msg">Message</label>
+                <textarea class="form-textarea" id="f-msg" placeholder="Hi Sayoojya, I'd love to connect about..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary clickable" style="width:100%;justify-content:center;font-size:0.95rem" id="submit-btn">
+                🚀 Send Message
+              </button>
+            </form>
+
+            <div class="form-success" id="form-success">
+              <div class="success-icon">🎉</div>
+              <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:0.5rem">Message Sent!</div>
+              <div style="color:var(--text-secondary);font-size:0.9rem">Thanks for reaching out. I'll reply soon!</div>
+              <button class="btn btn-ghost clickable" style="margin-top:1.5rem" onclick="resetForm()" id="reset-btn">↩ Send Another</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ PROJECTS ═══════════════ -->
+    <section class="section" id="projects">
+      <div class="container">
+        <span class="section-badge reveal"><span class="dot"></span> // projects.build()</span>
+        <h2 class="section-title reveal">What I've <span class="grad-text-fire">Built</span></h2>
+        <p class="section-subtitle reveal">Real projects built with passion — from technical platforms to multilingual experiences.</p>
+
+        <div class="proj-grid" id="proj-grid">
+
+          <!-- IEEE Website -->
+          <div class="proj-card tilt-card reveal rd1 clickable" id="proj-0" onclick="window.open('https://ieee-ignite-six.vercel.app/', '_blank')">
+            <div class="proj-glow" style="background:var(--sky)"></div>
+            <div class="proj-top">
+              <div class="proj-icon-wrap" style="background:linear-gradient(135deg,rgba(56,189,248,0.2),rgba(0,201,177,0.1));border:1px solid rgba(56,189,248,0.35)">
+                <span style="font-size:2rem">📡</span>
+              </div>
+              <div class="proj-number" style="color:var(--sky)">//01</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-category">Web Development · IEEE</div>
+              <h3 class="proj-name">IEEE Chapter<br/>Website</h3>
+              <p class="proj-desc">Official website developed for an IEEE student chapter — featuring event listings, member directories, technical resources, and chapter announcements. Designed to foster the engineering community.</p>
+              <div class="proj-tech">
+                <span class="proj-tag" style="color:var(--sky);border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.07)">HTML</span>
+                <span class="proj-tag" style="color:var(--sky);border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.07)">CSS</span>
+                <span class="proj-tag" style="color:var(--sky);border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.07)">JavaScript</span>
+                <span class="proj-tag" style="color:var(--sky);border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.07)">UI/UX Design</span>
+              </div>
+            </div>
+            <div class="proj-footer">
+              <button class="btn btn-outline-cyan btn-sm clickable" onclick="event.stopPropagation();window.open('https://ieee-ignite-six.vercel.app/', '_blank')" id="ieee-live-btn">↗ View Live</button>
+              <button class="btn btn-ghost btn-sm clickable" onclick="event.stopPropagation();showToast('📡 Developed for IEEE Ignite: A central directory of academic events and activities.')" id="ieee-detail-btn">Details</button>
+            </div>
+          </div>
+
+          <!-- Gestaverse -->
+          <div class="proj-card tilt-card reveal rd2 clickable" id="proj-1" onclick="window.open('https://main.d18tlmpexeh9fk.amplifyapp.com/', '_blank')">
+            <div class="proj-glow" style="background:var(--solar)"></div>
+            <div class="proj-top">
+              <div class="proj-icon-wrap" style="background:linear-gradient(135deg,rgba(255,123,44,0.2),rgba(255,71,87,0.1));border:1px solid rgba(255,123,44,0.35)">
+                <span style="font-size:2rem">🌐</span>
+              </div>
+              <div class="proj-number" style="color:var(--solar)">//02</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-category">Web Application · Language Tech</div>
+              <h3 class="proj-name">Gestaverse<br/><span style="font-size:0.6em;opacity:0.7">Multilingual Platform</span></h3>
+              <p class="proj-desc">A dynamic multilingual language platform — Gestaverse enables seamless communication across multiple languages with adaptive content, cultural nuance, and an accessible interface for diverse global users.</p>
+              <div class="proj-tech">
+                <span class="proj-tag" style="color:var(--solar);border-color:rgba(255,123,44,0.3);background:rgba(255,123,44,0.07)">Multilingual</span>
+                <span class="proj-tag" style="color:var(--solar);border-color:rgba(255,123,44,0.3);background:rgba(255,123,44,0.07)">Web App</span>
+                <span class="proj-tag" style="color:var(--solar);border-color:rgba(255,123,44,0.3);background:rgba(255,123,44,0.07)">UX Design</span>
+                <span class="proj-tag" style="color:var(--solar);border-color:rgba(255,123,44,0.3);background:rgba(255,123,44,0.07)">Accessibility</span>
+              </div>
+            </div>
+            <div class="proj-footer">
+              <button class="btn btn-outline-magenta btn-sm clickable" onclick="event.stopPropagation();window.open('https://main.d18tlmpexeh9fk.amplifyapp.com/', '_blank')" id="gesta-live-btn">↗ View Live</button>
+              <button class="btn btn-ghost btn-sm clickable" onclick="event.stopPropagation();showToast('🌐 Gestaverse: Multilingual Translation Platform supporting cultural representation and localization.')" id="gesta-detail-btn">Details</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- More projects coming -->
+        <div class="reveal" style="margin-top:3rem;text-align:center">
+          <div style="display:inline-flex;align-items:center;gap:0.75rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r-full);padding:0.75rem 1.5rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted)">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--lime);display:inline-block;animation:blink-dot 2s infinite"></span>
+            More projects in progress — check back soon!
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /app -->
+
+  <script src="script.js"></script>
+</body>
+</html>
